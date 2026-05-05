@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Autofac" Version="7.1.0" />
+      <PackageReference Include="EmbedIO" Version="3.4.3" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+      <PackageReference Include="NLog" Version="5.3.4" />
+      <PackageReference Include="ServiceStack.OrmLite.MySql" Version="5.9.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\TouchEmu.Core.Ankama.Protocol\TouchEmu.Core.Ankama.Protocol.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Managers\Pathfinding" />
+    </ItemGroup>
+
+</Project>

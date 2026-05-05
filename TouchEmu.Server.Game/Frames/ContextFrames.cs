@@ -1,0 +1,38 @@
+﻿using Autofac;
+using TouchEmu.Core.Ankama.Protocol.Messages;
+using TouchEmu.Core.Ankama.Protocol.SendMessages;
+using TouchEmu.Core.Common.Managers.Frames;
+using TouchEmu.Server.Game.Managers;
+using TouchEmu.Server.Game.Network;
+
+namespace TouchEmu.Server.Game.Frames
+{
+    public class ContextFrames
+    {
+        [InterceptFrame("GameContextCreateRequestMessage")]
+        public void GameContextCreateRequestMessageFrame(GameClient client, GameContextCreateRequestMessage gameContextCreateRequestMessage)
+        {
+            client.Send(new GameContextDestroyMessage());
+            client.Send(new GameContextCreateMessage(1)); //1 ??
+            client.Send(new CurrentMapMessage(client.Character.MapId, "649ae451ca33ec53bbcbcc33becf15f4"));
+        }
+
+        [InterceptFrame("MapInformationsRequestMessage")]
+        public void MapInformationsRequestMessageFrame(GameClient client, MapInformationsRequestMessage mapInformationsRequestMessage)
+        {
+            Container.Instance().Resolve<IMapManager>().SendMapInformationsRequest(client, mapInformationsRequestMessage);
+        }
+
+        [InterceptFrame("GameMapMovementRequestMessage")]
+        public void GameMapMovementRequestMessage(GameClient client, GameMapMovementRequestMessage gameMapMovementRequestMessage)
+        {
+            Container.Instance().Resolve<IMapManager>().GameMapMovement(client, gameMapMovementRequestMessage);
+        }
+        
+        [InterceptFrame("ChangeMapMessage")]
+        public void ChangeMapMessage(GameClient client, ChangeMapMessage changeMapMessage)
+        {
+            Container.Instance().Resolve<IMapManager>().ChangeMap(client, changeMapMessage);
+        }
+    }
+}

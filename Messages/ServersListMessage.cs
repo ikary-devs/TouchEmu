@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TouchEmu.Core.Ankama.Protocol.Messages
+{
+    public class ServersListMessage : NetworkMessage
+    {
+
+	    public GameServerInformations[] servers;
+
+
+        public ServersListMessage()
+        {
+        }
+
+        public ServersListMessage(GameServerInformations[] servers)
+        {
+            this.servers = servers;
+
+        }
+    }
+}
